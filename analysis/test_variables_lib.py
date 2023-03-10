@@ -21,9 +21,9 @@ def test_create_sequential_variables(in_memory_engine):
     )
 
     dataset = Dataset()
-    dataset.set_population(events.exists_for_patient())
+    dataset.define_population(events.exists_for_patient())
 
-    frame = events.take(events.date.is_on_or_after("2020-04-01"))
+    frame = events.where(events.date.is_on_or_after("2020-04-01"))
     create_sequential_variables(
         dataset, "date_{n}", frame, column="date", num_variables=3
     )
@@ -64,9 +64,9 @@ def test_create_sequential_variables_with_different_sort_column(in_memory_engine
     )
 
     dataset = Dataset()
-    dataset.set_population(events.exists_for_patient())
+    dataset.define_population(events.exists_for_patient())
 
-    frame = events.take(events.date.is_on_or_after("2020-04-01"))
+    frame = events.where(events.date.is_on_or_after("2020-04-01"))
     create_sequential_variables(
         dataset, "value_{n}", frame, column="value", sort_column="date", num_variables=3
     )
